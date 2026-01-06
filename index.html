@@ -1,341 +1,286 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project X — Infraestrutura de Execução Algorítmica</title>
+  <title>Project X — Global Trading Infrastructure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-color: #0a0a0c;
-      --text-main: #ffffff;
-      --text-dim: #88888e;
-      --accent-green: #4ade80;
-      --accent-yellow: #fbbf24;
-      --border-color: rgba(255, 255, 255, 0.08);
-      --card-bg: rgba(255, 255, 255, 0.02);
+      --bg-main: #07070b;
+      --bg-panel: #0c0c14;
+      --border: #1a1a26;
+      --text-main: #e6e6eb;
+      --text-muted: #9a9aa5;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59,130,246,0.25);
+      --success: #22c55e;
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      background-color: var(--bg-color);
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #0b0b16, var(--bg-main));
       color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 60px 20px;
-    }
-
-    .container {
-      max-width: 1200px;
-      width: 100%;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      margin-bottom: 100px;
-    }
-
-    .header-left {
-      font-size: 14px;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
-    }
-
-    .header-right {
-      display: flex;
-      gap: 24px;
-    }
-
-    .btn-text {
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .btn-outline {
-      border: 1px solid var(--border-color);
-      padding: 8px 20px;
-      border-radius: 4px;
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .hero {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .hero h1 {
-      font-size: 64px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 22px;
-      color: var(--text-dim);
-      font-weight: 400;
-      letter-spacing: 0.02em;
-    }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 80px;
-    }
-
-    .features-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 24px;
-    }
-
-    .features-list li {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 20px;
-      color: var(--text-main);
-      font-weight: 400;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      background-color: var(--accent-green);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--accent-green);
-    }
-
-    .status-card, .log-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 32px;
-    }
-
-    .card-title {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
-
-    .status-item, .log-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      font-size: 18px;
-      color: var(--text-main);
-    }
-
-    .check-icon {
-      color: var(--accent-green);
-      font-size: 20px;
-    }
-
-    .dot-yellow {
-      width: 10px;
-      height: 10px;
-      background-color: var(--accent-yellow);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--accent-yellow);
-    }
-
-    .previews-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin-bottom: 80px;
-    }
-
-    .preview-img {
-      width: 100%;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      background: #121218;
-      aspect-ratio: 16/10;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-
-    .preview-header {
-      background: #1c1c24;
-      padding: 10px 16px;
-      font-size: 12px;
-      color: var(--text-dim);
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .preview-body {
-      padding: 20px;
-      font-family: "SF Mono", "Monaco", "Courier New", monospace;
-      font-size: 11px;
-      color: var(--text-dim);
       line-height: 1.6;
     }
 
-    .contact-section {
+    header {
+      padding: 28px 60px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      gap: 20px;
-      font-size: 22px;
-      margin-bottom: 60px;
-      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+      background: rgba(7,7,11,0.85);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .btn-telegram {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border-color);
-      padding: 12px 24px;
-      border-radius: 8px;
-      color: var(--text-main);
+    header h1 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    header span {
+      color: var(--accent);
+    }
+
+    header a {
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 18px;
-      transition: background 0.3s;
+      color: var(--text-main);
+      font-size: 14px;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all .3s ease;
     }
 
-    .btn-telegram:hover {
-      background: rgba(255, 255, 255, 0.12);
+    header a:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .hero {
+      padding: 120px 60px;
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .hero h2 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: auto;
+      margin-bottom: 50px;
+    }
+
+    .hero .cta {
+      display: inline-block;
+      padding: 16px 40px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #2563eb);
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 0 40px var(--accent-glow);
+      transition: all .3s ease;
+    }
+
+    .hero .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px var(--accent-glow);
+    }
+
+    .section {
+      padding: 90px 60px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h3 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section p {
+      color: var(--text-muted);
+      max-width: 800px;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #0e0e18, var(--bg-panel));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      transition: all .3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px var(--accent-glow);
+      transform: translateY(-4px);
+    }
+
+    .card h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .metric {
+      text-align: center;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(12,12,20,0.6);
+    }
+
+    .metric h5 {
+      font-size: 28px;
+      color: var(--success);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .metric span {
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
     footer {
-      font-size: 14px;
-      color: var(--text-dim);
-      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding: 40px 60px;
       text-align: center;
-      padding-bottom: 40px;
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
-    @media (max-width: 1000px) {
-      .main-grid, .previews-grid {
-        grid-template-columns: 1fr;
+    @media(max-width: 768px) {
+      header {
+        padding: 20px;
       }
-      .hero h1 { font-size: 48px; }
+      .hero {
+        padding: 80px 20px;
+      }
+      .section {
+        padding: 70px 20px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <div class="header-left">seunome.project | project-x</div>
-      <div class="header-right">
-        <a href="#" class="btn-text">Sign in</a>
-        <a href="#" class="btn-outline">Sign up</a>
-      </div>
-    </header>
 
-    <section class="hero">
-      <h1>PROJECT X</h1>
-      <p>Infraestrutura profissional de execução algorítmica para MT5.</p>
-    </section>
+<header>
+  <h1>PROJECT <span>X</span></h1>
+  <a href="#">Admin Access</a>
+</header>
 
-    <div class="main-grid">
-      <ul class="features-list">
-        <li><div class="dot"></div> Execução global de sinais</li>
-        <li><div class="dot"></div> Risk control automático</li>
-        <li><div class="dot"></div> Kill switch global</li>
-        <li><div class="dot"></div> Painel administrativo em tempo real</li>
-      </ul>
+<section class="hero">
+  <h2>Global Trading <span>Infrastructure</span></h2>
+  <p>
+    Project X is a next-generation algorithmic trading platform,
+    combining quantitative intelligence, automated execution,
+    and institutional-grade risk control.
+  </p>
+  <a class="cta" href="#">Request Private Access</a>
+</section>
 
-      <div class="status-card">
-        <div class="card-title">Status:</div>
-        <div class="status-item"><span class="check-icon">✔</span> Beta fechado</div>
-        <div class="status-item"><span class="check-icon">✔</span> Infra ativa</div>
-      </div>
+<section class="section">
+  <h3>Why Project X</h3>
+  <p>
+    Built for scalability, security, and performance.
+    Designed to operate across brokers, assets, and users
+    with absolute control.
+  </p>
 
-      <div class="log-card">
-        <div class="card-title">Log:</div>
-        <div class="log-item"><span class="check-icon">✔</span> Beta fechado</div>
-        <div class="log-item"><div class="dot-yellow"></div> Vagas limitadas</div>
-      </div>
+  <div class="grid">
+    <div class="card">
+      <h4>Edge-Driven Architecture</h4>
+      <p>Independent algorithmic edges with isolated risk and execution logic.</p>
     </div>
-
-    <div class="previews-grid">
-      <div class="preview-img">
-        <div class="preview-header"><span>Project X</span><span>Admin Panel</span></div>
-        <div class="preview-body">
-          <div style="color: #fff; font-size: 14px; margin-bottom: 10px;">Project X — Admin Panel</div>
-          <div style="margin-bottom: 20px;">Sistema de gestão Project X Signal Hub</div>
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid #333; padding: 16px; border-radius: 6px;">
-            <div style="color: #4ade80; margin-bottom: 12px;">● BACKEND ONLINE</div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-              <span>USUÁRIOS ATIVOS</span>
-              <span style="color: #fff;">2</span>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-              <span>EAs ONLINE</span>
-              <span style="color: #fff;">0</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="preview-img">
-        <div class="preview-header"><span>Project X</span><span>Log Completo</span></div>
-        <div class="preview-body" style="font-size: 10px;">
-          <div style="color: #4ade80; margin-bottom: 4px;">C6W8S 23:00 SS 02:22 S89322-0.00839 OK Teresina</div>
-          <div style="margin-bottom: 4px;">EL0M8 23:00 SS 02:22 S89322-0.00839 OK Teresina</div>
-          <div style="margin-bottom: 4px;">C6W8S 23:00 SS 02:22 S89322-0.00839 OK Teresina</div>
-          <div style="margin-bottom: 4px;">EL0M8 23:00 SS 02:22 S89322-0.00839 OK Teresina</div>
-          <div style="margin-bottom: 4px;">C6W8S 23:00 SS 02:22 S89322-0.00839 OK Teresina</div>
-          <div style="margin-bottom: 4px;">EL0M8 23:00 SS 02:22 S89322-0.00839 OK Teresina</div>
-          <div style="margin-bottom: 4px;">C6W8S 23:00 SS 02:22 S89322-0.00839 OK Teresina</div>
-        </div>
-      </div>
-      <div class="preview-img">
-        <div class="preview-header"><span>MT5 Terminal</span></div>
-        <div class="preview-body" style="background: #050508; height: 100%; padding: 0; display: flex; flex-direction: column;">
-          <div style="flex: 1; border-bottom: 1px solid #222; position: relative; overflow: hidden;">
-             <svg width="100%" height="100%" viewBox="0 0 200 100" preserveAspectRatio="none">
-               <path d="M0,80 L20,70 L40,75 L60,50 L80,55 L100,30 L120,35 L140,10 L160,15 L180,5 L200,8" fill="none" stroke="#4ade80" stroke-width="1"/>
-               <rect x="58" y="45" width="4" height="10" fill="#4ade80"/>
-               <rect x="98" y="25" width="4" height="10" fill="#f87171"/>
-             </svg>
-          </div>
-          <div style="height: 40px; background: #1c1c24; display: flex; align-items: center; padding: 0 10px; gap: 10px;">
-            <div style="width: 30px; height: 4px; background: #444;"></div>
-            <div style="width: 50px; height: 4px; background: #444;"></div>
-          </div>
-        </div>
-      </div>
+    <div class="card">
+      <h4>Global Signal Hub</h4>
+      <p>Centralized signal distribution with authentication, plans and kill switches.</p>
     </div>
-
-    <div class="contact-section">
-      <span>Entre em contato: Telegram: @seuuser</span>
-      <a href="#" class="btn-telegram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-        Abrir no Telegram
-      </a>
+    <div class="card">
+      <h4>Institutional Risk Control</h4>
+      <p>Smart spread filters, market context awareness, and execution validation.</p>
     </div>
-
-    <footer>
-      Hospedado no Github Pages
-    </footer>
+    <div class="card">
+      <h4>Multi-User SaaS Ready</h4>
+      <p>Plans, limits, demo mode, telemetry and administrative control.</p>
+    </div>
   </div>
+</section>
+
+<section class="section">
+  <h3>Live Infrastructure Metrics</h3>
+
+  <div class="metrics">
+    <div class="metric">
+      <h5>24/7</h5>
+      <span>Crypto Market Coverage</span>
+    </div>
+    <div class="metric">
+      <h5>99.9%</h5>
+      <span>Execution Uptime</span>
+    </div>
+    <div class="metric">
+      <h5>&lt;50ms</h5>
+      <span>Signal Delivery</span>
+    </div>
+    <div class="metric">
+      <h5>Multi-Broker</h5>
+      <span>MT5 Compatible</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Project X — Quantitative Trading Infrastructure
+</footer>
+
 </body>
 </html>
