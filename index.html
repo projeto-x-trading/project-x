@@ -1,171 +1,334 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project X — Execution Intelligence</title>
-
-  <meta name="description" content="Project X is an institutional-grade execution intelligence platform for algorithmic trading, edge deployment and risk-managed signal distribution.">
-
+  <title>Project X — Infraestrutura de Execução Algorítmica</title>
+  <meta name="description" content="Infraestrutura profissional de execução algorítmica para MT5.">
+  
   <style>
-    :root {
-      --bg-main: #050508;
-      --bg-secondary: #0b0b12;
-      --accent: #4fd1c5;
-      --accent-soft: rgba(79,209,197,0.15);
-      --text-main: #e6e6eb;
-      --text-muted: #9ca3af;
-      --border-soft: rgba(255,255,255,0.08);
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen;
+    }
+
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-darker: #050508;
+      --text-primary: #e8e8ed;
+      --text-secondary: #a0a0a8;
+      --accent-green: #4fd1c5;
+      --accent-yellow: #d4a574;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --card-bg: rgba(255, 255, 255, 0.02);
     }
 
     body {
-      background: linear-gradient(180deg, var(--bg-main), var(--bg-secondary));
-      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
     }
 
     .container {
-      max-width: 1100px;
-      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
     }
 
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-color);
       margin-bottom: 60px;
     }
 
     .logo {
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--text-secondary);
     }
 
-    .badge {
-      font-size: 12px;
-      padding: 6px 12px;
-      border: 1px solid var(--border-soft);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      color: var(--text-muted);
+    .auth-links {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
     }
 
+    .auth-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .auth-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Main Hero Section */
     .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 60px;
+      text-align: center;
       margin-bottom: 80px;
     }
 
     .hero h1 {
-      font-size: 48px;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 540px;
-    }
-
-    .hero-box {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border-soft);
-      border-radius: 16px;
-      padding: 28px;
-    }
-
-    .hero-box h3 {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
+      font-size: 56px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
       margin-bottom: 16px;
+      color: var(--text-primary);
     }
 
-    .hero-box ul {
-      list-style: none;
+    .hero .subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+      font-weight: 400;
     }
 
-    .hero-box li {
-      font-size: 15px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border-soft);
+    .subtitle strong {
+      color: var(--text-primary);
+      font-weight: 600;
     }
 
-    .hero-box li:last-child {
-      border-bottom: none;
-    }
-
-    section {
+    /* Features and Status Grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
       margin-bottom: 80px;
     }
 
-    section h2 {
-      font-size: 32px;
+    .features-column {
+      grid-column: 1;
+    }
+
+    .features-list {
+      list-style: none;
+    }
+
+    .features-list li {
+      font-size: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-primary);
+    }
+
+    .features-list li::before {
+      content: '●';
+      color: var(--accent-green);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .status-box {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 32px;
+      background: var(--card-bg);
+      grid-column: 2;
+    }
+
+    .status-box h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       margin-bottom: 16px;
+      font-size: 15px;
     }
 
-    section p {
-      color: var(--text-muted);
-      max-width: 720px;
-      line-height: 1.6;
+    .status-item::before {
+      content: '●';
+      color: var(--accent-green);
+      font-size: 12px;
+      flex-shrink: 0;
     }
 
-    .grid {
+    .status-item.warning::before {
+      color: var(--accent-yellow);
+    }
+
+    .log-box {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 32px;
+      background: var(--card-bg);
+      grid-column: 3;
+    }
+
+    .log-box h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    .log-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+
+    .log-item::before {
+      content: '●';
+      color: var(--accent-green);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .log-item.warning::before {
+      color: var(--accent-yellow);
+    }
+
+    /* Dashboard Preview Grid */
+    .dashboard-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      margin-top: 32px;
+      margin-bottom: 80px;
     }
 
-    .card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border-soft);
-      border-radius: 14px;
+    .dashboard-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
       padding: 24px;
-    }
-
-    .card h4 {
-      margin-bottom: 12px;
-      font-size: 18px;
-    }
-
-    .card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    footer {
-      border-top: 1px solid var(--border-soft);
-      padding-top: 30px;
+      background: var(--card-bg);
+      min-height: 280px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      color: var(--text-muted);
+      flex-direction: column;
     }
 
-    @media (max-width: 900px) {
-      .hero {
+    .dashboard-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .dashboard-card p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .dashboard-content {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-family: 'Monaco', 'Courier New', monospace;
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dashboard-content-line {
+      margin-bottom: 4px;
+      opacity: 0.7;
+    }
+
+    .dashboard-content-line.active {
+      opacity: 1;
+      color: var(--accent-green);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 40px;
+      padding-bottom: 40px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer-contact {
+      margin-bottom: 24px;
+    }
+
+    .footer-contact strong {
+      color: var(--text-primary);
+    }
+
+    .footer-contact a {
+      color: var(--accent-green);
+      text-decoration: none;
+      margin-left: 8px;
+    }
+
+    .footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-telegram {
+      margin-bottom: 24px;
+    }
+
+    .footer-telegram a {
+      color: var(--accent-green);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-telegram a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-credit {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .content-grid {
         grid-template-columns: 1fr;
       }
-      .grid {
+
+      .status-box,
+      .log-box {
+        grid-column: 1 !important;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .dashboard-grid {
         grid-template-columns: 1fr;
+      }
+
+      .auth-links {
+        gap: 16px;
+        font-size: 12px;
       }
     }
   </style>
@@ -173,85 +336,104 @@
 
 <body>
   <div class="container">
-
+    
+    <!-- Header -->
     <header>
-      <div class="logo">PROJECT X</div>
-      <div class="badge">Institutional Execution Layer</div>
+      <div class="logo">seunome.project | project-x</div>
+      <div class="auth-links">
+        <a href="#">Sign in</a>
+        <a href="#">Sign up</a>
+      </div>
     </header>
 
-    <div class="hero">
-      <div>
-        <h1>Execution Intelligence<br>for Algorithmic Capital</h1>
-        <p>
-          Project X is a modular execution and signal orchestration platform
-          designed for systematic trading, multi-user deployment and
-          risk-governed edge distribution.
-        </p>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>PROJECT X</h1>
+      <p class="subtitle">Infraestrutura profissional de <strong>execução algorítmica</strong> para MT5.</p>
+    </section>
+
+    <!-- Content Grid: Features, Status, Log -->
+    <div class="content-grid">
+      <!-- Features Column -->
+      <div class="features-column">
+        <ul class="features-list">
+          <li>Execução global de sinais</li>
+          <li>Risk control automático</li>
+          <li>Kill switch global</li>
+          <li>Painel administrativo em tempo real</li>
+        </ul>
       </div>
 
-      <div class="hero-box">
-        <h3>Core Capabilities</h3>
-        <ul>
-          <li>Multi-user execution infrastructure</li>
-          <li>Edge-based signal intelligence</li>
-          <li>Centralized risk & kill switch control</li>
-          <li>Institutional-grade auditability</li>
-          <li>Hybrid local + remote execution</li>
-        </ul>
+      <!-- Status Box -->
+      <div class="status-box">
+        <h3>Status:</h3>
+        <div class="status-item">Beta fechado</div>
+        <div class="status-item">Infra ativa</div>
+      </div>
+
+      <!-- Log Box -->
+      <div class="log-box">
+        <h3>Log:</h3>
+        <div class="log-item">Beta fechado</div>
+        <div class="log-item warning">Vagas limitadas</div>
       </div>
     </div>
 
-    <section>
-      <h2>What is Project X?</h2>
-      <p>
-        Project X operates as an execution backbone between strategy intelligence
-        and market infrastructure. It enables controlled distribution of trading
-        edges, real-time supervision of execution agents and robust risk
-        enforcement across accounts and users.
-      </p>
-    </section>
-
-    <section>
-      <h2>System Architecture</h2>
-      <div class="grid">
-        <div class="card">
-          <h4>Signal Hub</h4>
-          <p>
-            Centralized signal validation, authentication, plan enforcement and
-            execution control with full audit logs.
-          </p>
-        </div>
-
-        <div class="card">
-          <h4>Execution Agents</h4>
-          <p>
-            Lightweight MT5 execution engines connected via secure API,
-            supporting demo and live environments.
-          </p>
-        </div>
-
-        <div class="card">
-          <h4>Admin Control Center</h4>
-          <p>
-            Global dashboard for user management, system health monitoring,
-            risk switches and operational oversight.
-          </p>
+    <!-- Dashboard Preview Grid -->
+    <div class="dashboard-grid">
+      <!-- Card 1: Admin Panel -->
+      <div class="dashboard-card">
+        <h4>Project X — Admin Panel</h4>
+        <p>Sistema de gestão Project X Signal Hub</p>
+        <div class="dashboard-content">
+          <div class="dashboard-content-line">■ Dashboard</div>
+          <div class="dashboard-content-line">■ Usuários</div>
+          <div class="dashboard-content-line">■ API</div>
+          <div class="dashboard-content-line">■ Estatísticas</div>
+          <div class="dashboard-content-line">■ Planos</div>
+          <div class="dashboard-content-line">■ Logs</div>
+          <div class="dashboard-content-line">■ Configurações</div>
+          <div class="dashboard-content-line">v3.0.0</div>
         </div>
       </div>
-    </section>
 
-    <section>
-      <h2>Positioning</h2>
-      <p>
-        Designed with hedge fund, prop trading and systematic operators in mind,
-        Project X prioritizes reliability, transparency and controlled growth
-        over retail hype.
-      </p>
-    </section>
+      <!-- Card 2: Log Complete -->
+      <div class="dashboard-card">
+        <h4>Project X — Log Complete</h4>
+        <div class="dashboard-content">
+          <div class="dashboard-content-line">Cx4SR 23:00 00:28 00:23 SS89373-0.0682309 OK Teresina</div>
+          <div class="dashboard-content-line">EL0MR 23:00 00:28 00:23 SS89373-0.0682309 OK Teresina</div>
+          <div class="dashboard-content-line">EL0NX 23:00 00:28 00:23 SS89373-0.0682309 OK Teresina</div>
+          <div class="dashboard-content-line">EL0NX 23:00 00:28 00:23 SS89373-0.0682309 OK Teresina</div>
+          <div class="dashboard-content-line">EL0NX 23:00 00:28 00:23 SS89373-0.0682309 OK Teresina</div>
+          <div class="dashboard-content-line">EL0NX 23:00 00:28 00:23 SS89373-0.0682309 OK Teresina</div>
+          <div class="dashboard-content-line">EL0NX 23:00 00:28 00:23 SS89373-0.0682309 OK Teresina</div>
+        </div>
+      </div>
 
+      <!-- Card 3: Trading Chart -->
+      <div class="dashboard-card">
+        <h4>Gráfico de Operações</h4>
+        <p>Visualização em tempo real de operações</p>
+        <div class="dashboard-content">
+          <div class="dashboard-content-line">Operações: 1.111</div>
+          <div class="dashboard-content-line">Lucro: Mach/Sem Usar</div>
+          <div class="dashboard-content-line">Headings: ColdWater, Emery</div>
+          <div class="dashboard-content-line">BX (LOKO CO EFEITOS) L31.96</div>
+          <div class="dashboard-content-line">Fundo GEO 3.64 GEO Ameri</div>
+          <div class="dashboard-content-line">Fundo GEO 3.64 GEO Ameri</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
-      <div>© Project X — Execution Intelligence</div>
-      <div>Private infrastructure • Limited access</div>
+      <div class="footer-contact">
+        <strong>Entre em contato:</strong> Telegram: @seuuser <a href="#">Abrir no Telegram</a>
+      </div>
+      <div class="footer-credit">
+        Hospedado no Github Pages
+      </div>
     </footer>
 
   </div>
